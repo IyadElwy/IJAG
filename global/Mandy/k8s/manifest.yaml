@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mandy-sopel
+spec:
+  selector:
+    matchLabels:
+      app: mandy-sopel
+  template:
+    metadata:
+      labels:
+        app: mandy-sopel
+    spec:
+      containers:
+        - name: mandy-sopel
+          image: docker.io/library/mandy-sopel:latest
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: laptop
+  labels:
+    name: laptop
+spec:
+  containers:
+    - name: laptop
+      image: docker.io/library/laptop:latest
+      imagePullPolicy: Never
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "100m"
