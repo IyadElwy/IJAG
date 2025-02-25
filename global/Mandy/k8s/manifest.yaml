@@ -11,6 +11,24 @@ spec:
       labels:
         app: mandy-sopel
     spec:
+      initContainers:
+        - name: setup-default-db
+          image: bitnami/minideb:latest
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
+          volumeMounts:
+            - mountPath: /data
+              name: db-persistence
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - >
+              touch /data/default.db &&
+              chmod 600 /data/default.db &&
+              chown 1000:1000 /data/default.db
       containers:
         - name: mandy-sopel
           image: docker.io/library/mandy-sopel:latest
@@ -19,3 +37,22 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "100m"
+          volumeMounts:
+            - mountPath: /home/mandy/.sopel/default.db
+              subPath: default.db
+              name: db-persistence
+      volumes:
+        - name: db-persistence
+          persistentVolumeClaim:
+            claimName: mandy-sopel-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mandy-sopel-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi

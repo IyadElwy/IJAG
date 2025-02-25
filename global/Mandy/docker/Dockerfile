@@ -10,7 +10,8 @@ RUN apt update -y \
     && apt install python3-pip -y \
     && apt install ca-certificates -y \
     && update-ca-certificates \
-    && useradd -m mandy
+    && groupadd -g 1000 mandy \
+    && useradd mandy -u 1000 -g 1000 -m
 
 USER mandy
 
