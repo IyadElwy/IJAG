@@ -1,0 +1,3 @@
+- add readme with install and setup instructions
+  - include command to start minikube with needed arguments
+- network policy won't work on vanilla minikube (look at handbook)

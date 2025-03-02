@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: laptop
+  name: wa11y
+  namespace: default
   labels:
-    name: laptop
+    name: wa11y
 spec:
   containers:
-    - name: laptop
-      image: docker.io/library/laptop:latest
+    - name: irc
+      image: docker.io/library/wa11y:latest
       imagePullPolicy: Never
       resources:
         limits:

@@ -1,9 +1,9 @@
+import requests
 from sopel import plugin
 
 
 @plugin.rule(r".*")  # Matches any message
 def reply_all(bot, trigger):
-    """Responds to every message in the channel"""
     # Don't respond to messages from the bot itself to avoid loops
     if trigger.nick == bot.nick:
         return
@@ -12,6 +12,12 @@ def reply_all(bot, trigger):
     if trigger.match.string.startswith("."):
         return
 
+    reply = trigger.match.string
     # Send response
-    bot.say("Hello, friend.")
-    bot.say("You said: {}".format(trigger.match.string))
+    # bot.say("You said: {}".format(trigger.match.string))
+
+
+@plugin.event("JOIN")
+def on_join(bot, trigger):
+    message = requests.post("state-server:5003/onjoin")
+    print(message)

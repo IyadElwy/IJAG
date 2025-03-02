@@ -1,0 +1,221 @@
+{
+    "level": {
+        "1": {
+            "title": "Goodbye, World!",
+            "storyPlot": [
+                "A pod called wa11y?",
+                "I wonder what kind of stuff this thing's running?",
+                "But who's wally?",
+                "",
+                "",
+                "Welcome to your first level.",
+                "The current pod is your entrypoint to the game.",
+                "You can use the notes app to write notes, get current objectives and more.",
+                "Run \"notes --help\" to know more about how to use it."
+            ],
+            "objectives": [
+                "Check for any special software that might be installed on the pod and try to run it."
+            ],
+            "levelKey": "",
+            "onWrongKey": {
+                "message": "That's not the one."
+            },
+            "onCorrectKey": {
+                "message": "That worked!",
+                "action": ""
+            },
+            "convoNodes": {
+                "start": {
+                    "message": "Hello? Wa11y? Is that you?",
+                    "choices": [
+                        {
+                            "reply": "Who is this?",
+                            "nextNode": "whoIsThis"
+                        },
+                        {
+                            "reply": "No, It's not.",
+                            "nextNode": "notWally"
+                        },
+                        {
+                            "reply": "Yes.",
+                            "nextNode": "yesIAm"
+                        }
+                    ]
+                },
+                "whoIsThis": {
+                    "message": "Wally would never ask that, even if he wasn't sure about the person on the other end. Who are you?",
+                    "choices": [
+                        {
+                            "reply": "I found this usb drive on my way home. It had a k8s config on it.",
+                            "nextNode": "foundUsbOnWayHome"
+                        },
+                        {
+                            "reply": "I'm sorry. This was a mistake. I should just go.",
+                            "nextNode": "thisWasMistake"
+                        }
+                    ]
+                },
+                "notWally": {
+                    "message": "Who are you? And how did you get access to this k8s cluster?",
+                    "choices": [
+                        {
+                            "reply": "I found this usb drive on my way home. It had a k8s config on it.",
+                            "nextNode": "foundUsbOnWayHome"
+                        },
+                        {
+                            "reply": "I'm sorry. This was a mistake. I should just go.",
+                            "nextNode": "thisWasMistake"
+                        }
+                    ]
+                },
+                "yesIAm": {
+                    "message": "Who are you? You're not wally!",
+                    "choices": [
+                        {
+                            "reply": "You're right. I'm sorry. This was a mistake. I should just go.",
+                            "nextNode": "thisWasMistake"
+                        },
+                        {
+                            "reply": "What do you mean? Of course it's me.",
+                            "nextNode": "ofCourseItsMe"
+                        }
+                    ]
+                },
+                "foundUsbOnWayHome": {
+                    "message": "What?! Wally would never be so reckless. Well maybe sometimes, but never when it came to something as important as this. Something must've happened to him. Now please tell me. Who are you?",
+                    "choices": [
+                        {
+                            "reply": "My name is Micheal De Santa",
+                            "nextNode": "michealDeSanta"
+                        },
+                        {
+                            "reply": "I don't know you. How can you expect me to trust you.",
+                            "nextNode": "dontKnowYou"
+                        }
+                    ]
+                },
+                "thisWasMistake": {
+                    "message": "No! No! Please wait. I need your help. Maybe we can start slow. What's your name?",
+                    "choices": [
+                        {
+                            "reply": "My name is Micheal De Santa",
+                            "nextNode": "michealDeSanta"
+                        },
+                        {
+                            "reply": "I don't know you. How can you expect me to trust you with my name.",
+                            "nextNode": "dontKnowYou"
+                        }
+                    ]
+                },
+                "ofCourseItsMe": {
+                    "message": "Whoever you are. Please stop lying. I need your help. Now maybe we can start slow. What's your name?",
+                    "choices": [
+                        {
+                            "reply": "My name is Micheal De Santa",
+                            "nextNode": "michealDeSanta"
+                        },
+                        {
+                            "reply": "I don't know you. How can you expect me to trust you with my name.",
+                            "nextNode": "dontKnowYou"
+                        }
+                    ]
+                },
+                "michealDeSanta": {
+                    "message": "You think I can't differentiate between a real name and a made up one? Especially one from a fucking video game. ",
+                    "choices": [
+                        {
+                            "reply": "I'm sorry but I don't know what you want from me. I could get into real trouble.",
+                            "nextNode": "needYourHelp"
+                        },
+                        {
+                            "reply": "Sorry but I can't tell you who I am.",
+                            "nextNode": "needYourHelp"
+                        }
+                    ]
+                },
+                "dontKnowYou": {
+                    "message": "Okay. Fair enough. You don't have to tell me who you are. At least for now.",
+                    "choices": [
+                        {
+                            "reply": "What do you mean, \"Not now\"?.",
+                            "nextNode": "needYourHelp"
+                        },
+                        {
+                            "reply": "Glad we're on the same page on that.",
+                            "nextNode": "needYourHelp"
+                        }
+                    ]
+                },
+                "needYourHelp": {
+                    "message": "Look. I don't know you. You don't know me. But I need your help. This is bigger than you; or me.",
+                    "choices": [
+                        {
+                            "reply": "My help? What could I... possibly do?",
+                            "nextNode": "couldIPossiblyDo"
+                        },
+                        {
+                            "reply": "What's in it for me?",
+                            "nextNode": "couldIPossiblyDo"
+                        }
+                    ]
+                },
+                "couldIPossiblyDo": {
+                    "message": "Look. I'm giving you an opportunity to actually make something of yourself. And you seem to know your way around a bash shell. An art forgotten by almost everyone. And that's all you need to start. Anything else you can pick up along the way.",
+                    "choices": [
+                        {
+                            "reply": "What is it that you actually need help with?",
+                            "nextNode": "whatHelp"
+                        },
+                        {
+                            "reply": "What do you want?",
+                            "nextNode": "whatHelp"
+                        }
+                    ]
+                },
+                "whatHelp": {
+                    "message": "First I'll need you not to freak out. The cluster, you're connected to is actually running on the main Turing Corp servers. And that's where I currently am. The team and I were on a covert mission and it went a bit south. I'm not sure where the rest of my team is, including wally. I was able to hide out in the server room where they won't find me. But I can't access any cluster resources directly. Wally has the only working kube config and you can't send it over irc. If any AI intercepted our messages they would be able to decrypt it and know exactly what we were doing.",
+                    "choices": [
+                        {
+                            "reply": "You gotta be kidding me! That's a joke right? right? I can't do something like this. If they found out, they would send me to prison for the rest of my life.",
+                            "nextNode": "prisonForLife"
+                        },
+                        {
+                            "reply": "I'm not sure if you're joking or not. Tell me one good reason why I shouldn't just call the authorities on you right now.",
+                            "nextNode": "snitchOnThem"
+                        }
+                    ]
+                },
+                "prisonForLife": {
+                    "message": "I didn't wanna do this. But I don't have a choice. If you don't help me right now, there won't be a \"you\" to go to prison. The AGI has evolved so much that it does not see any need for...us. I'm sure you've heard about the bombings in south africa. Those were not terrorists. Well at least not in the traditional sense. AGI decrypted the Nuke codes of a nearby private army. And it took only 46 minutes to decrypt AES-256 level encryption. It wants to start with 3rd world countries so that by the time they get to us, they'd already have wiped out most of the hemisphere. If you don't help me right now, we are done for.",
+                    "choices": [
+                        {
+                            "reply": "What do you need me to do?",
+                            "nextNode": "thisIsWhatINeedYouToDo"
+                        },
+                        {
+                            "reply": "Okay. What the hell, I don't have that much to live for anyway.",
+                            "nextNode": "thisIsWhatINeedYouToDo"
+                        }
+                    ]
+                },
+                "snitchOnThem": {
+                    "message": "I didn't wanna do this. But I don't have a choice. If you don't help me right now, there won't be a \"you\" to call the authorities or do anything for that matter. The AGI has evolved so much that it does not see any need for...us. I'm sure you've heard about the bombings in south africa. Those were not terrorists. Well at least not in the traditional sense. AGI decrypted the Nuke codes of a nearby private army. And it took only 46 minutes to decrypt AES-256 level encryption. It wants to start with 3rd world countries so that by the time they get to us, they'd already have wiped out most of the hemisphere. If you don't help me right now, we are done for.",
+                    "choices": [
+                        {
+                            "reply": "What do you need me to do?",
+                            "nextNode": "thisIsWhatINeedYouToDo"
+                        },
+                        {
+                            "reply": "Okay. What the hell, I don't have that much to live for anyway.",
+                            "nextNode": "thisIsWhatINeedYouToDo"
+                        }
+                    ]
+                },
+                "thisIsWhatINeedYouToDo": {
+                    "message": "Let's not get into everything all at once. First I'll need you to understand what a namespace in k8s is. Then you should be able to list all current namespaces in the cluster. One of them will sort of look like a base64 encoded string. I need you to get me that one.",
+                    "choices": []
+                }
+            }
+        }
+    }
+}

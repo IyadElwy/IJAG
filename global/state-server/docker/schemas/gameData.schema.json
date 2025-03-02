@@ -1,0 +1,167 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "gameData",
+    "description": "The game data",
+    "type": "object",
+    "properties": {
+        "level": {
+            "description": "The game state for each level",
+            "type": "object",
+            "patternProperties": {
+                "^[0-9]+$": {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "description": "Level title",
+                            "type": "string"
+                        },
+                        "storyPlot": {
+                            "description": "The plot for the current level",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "objectives": {
+                            "description": "Current level objectives",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "levelKey": {
+                            "description": "The answer key for the current level",
+                            "type": "string"
+                        },
+                        "onWrongKey": {
+                            "description": "Response when an incorrect key is provided",
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "onCorrectKey": {
+                            "description": "Response when the correct key is provided",
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "action": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "convoNodes": {
+                            "description": "The conversation nodes for the interactive narrative",
+                            "type": "object",
+                            "patternProperties": {
+                                "start": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "The message displayed for this conversation node"
+                                        },
+                                        "choices": {
+                                            "type": "array",
+                                            "description": "Available response choices for this node",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "reply": {
+                                                        "type": "string",
+                                                        "description": "The player's response text"
+                                                    },
+                                                    "nextNode": {
+                                                        "type": "string",
+                                                        "description": "The ID of the next conversation node to navigate to"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "reply",
+                                                    "nextNode"
+                                                ],
+                                                "additionalProperties": false
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "message",
+                                        "choices"
+                                    ],
+                                    "additionalProperties": false
+                                },
+                                "^.*$": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "The message displayed for this conversation node"
+                                        },
+                                        "choices": {
+                                            "type": "array",
+                                            "description": "Available response choices for this node",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "reply": {
+                                                        "type": "string",
+                                                        "description": "The player's response text"
+                                                    },
+                                                    "nextNode": {
+                                                        "type": "string",
+                                                        "description": "The ID of the next conversation node to navigate to"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "reply",
+                                                    "nextNode"
+                                                ],
+                                                "additionalProperties": false
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "message",
+                                        "choices"
+                                    ],
+                                    "additionalProperties": false
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                                "start"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "title",
+                        "storyPlot",
+                        "objectives",
+                        "levelKey",
+                        "onWrongKey",
+                        "onCorrectKey",
+                        "convoNodes"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "level"
+    ]
+}

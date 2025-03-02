@@ -1,0 +1,57 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "gameState",
+    "description": "Schema for game state tracking levels, conversation nodes, and notes",
+    "type": "object",
+    "required": [
+        "currentLevel",
+        "currentState"
+    ],
+    "properties": {
+        "currentLevel": {
+            "type": "string",
+            "description": "The current active level number",
+        },
+        "currentState": {
+            "type": "object",
+            "required": [
+                "level"
+            ],
+            "properties": {
+                "level": {
+                    "type": "object",
+                    "description": "A collection of game levels indexed by level number",
+                    "patternProperties": {
+                        "^[0-9]+$": {
+                            "type": "object",
+                            "required": [
+                                "orderedConvoNodes",
+                                "notes"
+                            ],
+                            "properties": {
+                                "orderedConvoNodes": {
+                                    "type": "array",
+                                    "description": "Ordered list of conversation node identifiers",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "notes": {
+                                    "type": "array",
+                                    "description": "Collection of notes for this level",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
