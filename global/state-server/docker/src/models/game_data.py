@@ -11,18 +11,20 @@ class ConversationChoice(BaseModel):
 
 
 class ConversationNode(BaseModel):
-    message: str = Field(description="The message displayed for this conversation node")
+    message: List[str] = Field(
+        description="The message displayed for this conversation node"
+    )
     choices: List[ConversationChoice] = Field(
         description="Available response choices for this node"
     )
 
 
 class OnWrongKey(BaseModel):
-    message: str
+    message: List[str]
 
 
 class OnCorrectKey(BaseModel):
-    message: str
+    message: List[str]
     action: Optional[str] = None
 
 

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
 
-class Reply(BaseModel):
-    text: str
+class NextNode(BaseModel):
+    next_node_title: str

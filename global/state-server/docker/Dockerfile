@@ -8,13 +8,13 @@ RUN apt update -y \
     && apt install python3-pip -y
 
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /state-server
+WORKDIR /state-server
 COPY . .
 
 RUN python3 -m venv env \
-    && /app/env/bin/pip install fastapi[standard] pydantic   
+    && /state-server/env/bin/pip install fastapi[standard] pydantic   
 
-ENV PATH="/app/env/bin:$PATH"
-ENTRYPOINT ["python3", "/app/src/run.py"]
+ENV PATH="/state-server/env/bin:$PATH"
+ENTRYPOINT ["python3", "/state-server/src/run.py"]
 

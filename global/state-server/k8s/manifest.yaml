@@ -12,6 +12,23 @@ spec:
       labels:
         app: state-server
     spec:
+      initContainers:
+        - name: initialize-game-state
+          image: docker.io/library/state-server:latest
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
+          volumeMounts:
+            - mountPath: /data
+              name: game-state-vol
+          command:
+            - /bin/bash
+            - -c
+          args:
+            - >
+              cp /state-server/data/initialGameState.json /data/gameState.json
       containers:
         - name: state-server
           image: docker.io/library/state-server:latest
@@ -22,6 +39,14 @@ spec:
               cpu: "100m"
           ports:
             - containerPort: 5003
+          volumeMounts:
+            - mountPath: /data
+              name: game-state-vol
+
+      volumes:
+        - name: game-state-vol
+          persistentVolumeClaim:
+            claimName: game-state-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -33,3 +58,14 @@ spec:
   ports:
     - port: 5003
       targetPort: 5003
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: game-state-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi

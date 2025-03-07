@@ -38,7 +38,10 @@
                             "type": "object",
                             "properties": {
                                 "message": {
-                                    "type": "string"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
                                 }
                             },
                             "required": [
@@ -51,7 +54,10 @@
                             "type": "object",
                             "properties": {
                                 "message": {
-                                    "type": "string"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
                                 },
                                 "action": {
                                     "type": "string"
@@ -70,7 +76,10 @@
                                     "type": "object",
                                     "properties": {
                                         "message": {
-                                            "type": "string",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
                                             "description": "The message displayed for this conversation node"
                                         },
                                         "choices": {
@@ -106,7 +115,10 @@
                                     "type": "object",
                                     "properties": {
                                         "message": {
-                                            "type": "string",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
                                             "description": "The message displayed for this conversation node"
                                         },
                                         "choices": {
