@@ -29,10 +29,6 @@
                                 "type": "string"
                             }
                         },
-                        "levelKey": {
-                            "description": "The answer key for the current level",
-                            "type": "string"
-                        },
                         "onWrongKey": {
                             "description": "Response when an incorrect key is provided",
                             "type": "object",
@@ -58,9 +54,6 @@
                                     "items": {
                                         "type": "string"
                                     }
-                                },
-                                "action": {
-                                    "type": "string"
                                 }
                             },
                             "required": [
@@ -161,7 +154,6 @@
                         "title",
                         "storyPlot",
                         "objectives",
-                        "levelKey",
                         "onWrongKey",
                         "onCorrectKey",
                         "convoNodes"

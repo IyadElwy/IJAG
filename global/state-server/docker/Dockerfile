@@ -13,7 +13,7 @@ WORKDIR /state-server
 COPY . .
 
 RUN python3 -m venv env \
-    && /state-server/env/bin/pip install fastapi[standard] pydantic   
+    && /state-server/env/bin/pip install fastapi[standard] pydantic kubernetes   
 
 ENV PATH="/state-server/env/bin:$PATH"
 ENTRYPOINT ["python3", "/state-server/src/run.py"]

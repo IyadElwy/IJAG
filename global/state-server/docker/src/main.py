@@ -1,3 +1,4 @@
+from alter_state.alter import alter_state
 from fastapi import FastAPI
 from models.game_data import ConversationNode
 from models.messages import NextNode
@@ -15,7 +16,7 @@ async def getNextNodeMessage(next_node: NextNode | None = None) -> ConversationN
     # get nextNode From req body
     next_node_title = next_node.next_node_title if next_node else "start"
     # get current level
-    current_game_state = get_current_game_state("/data/gameState.json")
+    current_game_state = get_current_game_state()
     current_level = current_game_state.currentLevel
     # get orderedConvoNodes array
     current_level_ordered_convo_nodes = current_game_state.currentState.level.get(
@@ -26,18 +27,11 @@ async def getNextNodeMessage(next_node: NextNode | None = None) -> ConversationN
         next_node and len(current_level_ordered_convo_nodes) > 0
     ) is True
     # get current level game data
-    current_level_game_data = get_game_level_data(
-        "/state-server/data/gameData.json",
-        current_level,
-    )
+    current_level_game_data = get_game_level_data(current_level)
     next_node_data = current_level_game_data.convoNodes.get(next_node_title, None)
     if next_node_data:
         # add next_node to orderedConvoNodes
-        add_game_state_ordered_convo_node(
-            "/data/gameState.json",
-            current_level,
-            next_node_title,
-        )
+        add_game_state_ordered_convo_node(current_level, next_node_title)
         return next_node_data
     # if next_node is invalid get latest node data from orderedConvoNodes
     next_node_data = current_level_game_data.convoNodes.get(
@@ -49,41 +43,43 @@ async def getNextNodeMessage(next_node: NextNode | None = None) -> ConversationN
     # if it is then first check for correctness
     # if it is not correct create a ConversationNode with the OnWrongKey message
     # and send it
-    if next_node_title != current_level_game_data.levelKey:
+    if (
+        next_node_title
+        != current_game_state.currentState.level.get(current_level).levelKey
+    ):
         on_wrong_key_message = current_level_game_data.onWrongKey.message
         return ConversationNode(message=on_wrong_key_message, choices=[])
-
-    # if it is correct then run the action for the current onCorrectKey level
-    action = current_level_game_data.onCorrectKey.action
-
+    # change state of k8s environment according to new state
+    alter_state(str(int(current_level) + 1))
     # then create a ConversationNode with the onCorrectKey message
     # and send it
     on_correct_key_message = current_level_game_data.onCorrectKey.message
-    return ConversationNode(message=on_correct_key_message, choices=[])
+    return ConversationNode(
+        message=on_correct_key_message,
+        choices=[
+            {
+                "reply": "Type anything to move on to the next level.",
+                "nextNode": "Anything",
+            }
+        ],
+    )
 
 
 @app.post("/onjoin")
 async def on_join() -> ConversationNode:
-    current_game_state = get_current_game_state("/data/gameState.json")
+    current_game_state = get_current_game_state()
     current_level = current_game_state.currentLevel
     # get orderedConvoNodes array
     current_level_ordered_convo_nodes = current_game_state.currentState.level.get(
         current_level
     ).orderedConvoNodes
-    current_level_game_data = get_game_level_data(
-        "/state-server/data/gameData.json",
-        current_level,
-    )
+    current_level_game_data = get_game_level_data(current_level)
     # if orderedConvoNodes is empty then initialize orderedConvoNodes with start_node
     # and send start node
     if len(current_level_ordered_convo_nodes) == 0:
         start_node_data = current_level_game_data.convoNodes["start"]
         # add start_node to orderedConvoNodes
-        add_game_state_ordered_convo_node(
-            "/data/gameState.json",
-            current_level,
-            "start",
-        )
+        add_game_state_ordered_convo_node(current_level, "start")
         return start_node_data
     # else send last node from orderedConvoNodes
     next_node_data = current_level_game_data.convoNodes.get(

@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
@@ -25,14 +25,12 @@ class OnWrongKey(BaseModel):
 
 class OnCorrectKey(BaseModel):
     message: List[str]
-    action: Optional[str] = None
 
 
 class Level(BaseModel):
     title: str = Field(description="Level title")
     storyPlot: List[str] = Field(description="The plot for the current level")
     objectives: List[str] = Field(description="Current level objectives")
-    levelKey: str = Field(description="The answer key for the current level")
     onWrongKey: OnWrongKey = Field(
         description="Response when an incorrect key is provided"
     )

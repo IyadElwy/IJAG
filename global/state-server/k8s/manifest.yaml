@@ -12,6 +12,7 @@ spec:
       labels:
         app: state-server
     spec:
+      serviceAccountName: state-changer-service-account
       initContainers:
         - name: initialize-game-state
           image: docker.io/library/state-server:latest
@@ -52,6 +53,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: state-server
+  namespace: global
 spec:
   selector:
     app: state-server
@@ -63,9 +65,29 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: game-state-pvc
+  namespace: global
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 50Mi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: state-changer-service-account
+  namespace: global
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: state-changer-rolebinding
+subjects:
+  - kind: ServiceAccount
+    name: state-changer-service-account
+    namespace: global
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

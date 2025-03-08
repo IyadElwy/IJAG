@@ -16,7 +16,6 @@
             "objectives": [
                 "Check for any special software that might be installed on the pod and try to run it."
             ],
-            "levelKey": "",
             "onWrongKey": {
                 "message": [
                     "That's not the one."
@@ -25,8 +24,7 @@
             "onCorrectKey": {
                 "message": [
                     "That worked!"
-                ],
-                "action": ""
+                ]
             },
             "convoNodes": {
                 "start": {
@@ -390,7 +388,7 @@
                         "Let's not get into everything all at once.",
                         "First I'll need you to understand what a namespace in k8s is.",
                         "Then you should be able to list all current namespaces in the cluster.",
-                        "One of them will sort of look like a base64 encoded string.",
+                        "One of them will be some cryptic key.",
                         "I need you to get me that one."
                     ],
                     "choices": []
@@ -400,10 +398,44 @@
                         "Let's not get into everything all at once.",
                         "First I'll need you to understand what a namespace in k8s is.",
                         "Then you should be able to list all current namespaces in the cluster.",
-                        "One of them will sort of look like a base64 encoded string.",
+                        "One of them will be some cryptic key.",
                         "I need you to get me that one."
                     ],
                     "choices": []
+                }
+            }
+        },
+        "2": {
+            "title": "What now?",
+            "storyPlot": [],
+            "objectives": [
+                ""
+            ],
+            "onWrongKey": {
+                "message": [
+                    "That's not the one."
+                ]
+            },
+            "onCorrectKey": {
+                "message": [
+                    "That worked!"
+                ]
+            },
+            "convoNodes": {
+                "start": {
+                    "message": [
+                        "Okay, now that we removed this namespace we can get started."
+                    ],
+                    "choices": [
+                        {
+                            "reply": "You want more from me?",
+                            "nextNode": "wantMore"
+                        },
+                        {
+                            "reply": "Good, what's next?",
+                            "nextNode": "whatIsNext"
+                        }
+                    ]
                 }
             }
         }

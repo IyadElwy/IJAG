@@ -4,3 +4,10 @@ metadata:
   name: global
   labels:
     name: global
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: 1f61252f-2ef9-41f4-a169-532093521b4e
+  labels:
+    name: 1f61252f-2ef9-41f4-a169-532093521b4e

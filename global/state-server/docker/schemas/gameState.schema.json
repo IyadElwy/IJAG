@@ -26,7 +26,8 @@
                             "type": "object",
                             "required": [
                                 "orderedConvoNodes",
-                                "notes"
+                                "notes",
+                                "levelKey"
                             ],
                             "properties": {
                                 "orderedConvoNodes": {
@@ -42,6 +43,10 @@
                                     "items": {
                                         "type": "string"
                                     }
+                                },
+                                "levelKey": {
+                                    "description": "The answer key for the current level",
+                                    "type": "string"
                                 }
                             },
                             "additionalProperties": false
