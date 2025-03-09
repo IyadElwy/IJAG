@@ -30,7 +30,6 @@ class OnCorrectKey(BaseModel):
 class Level(BaseModel):
     title: str = Field(description="Level title")
     storyPlot: List[str] = Field(description="The plot for the current level")
-    objectives: List[str] = Field(description="Current level objectives")
     onWrongKey: OnWrongKey = Field(
         description="Response when an incorrect key is provided"
     )

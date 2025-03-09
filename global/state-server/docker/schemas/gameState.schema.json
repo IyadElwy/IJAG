@@ -26,20 +26,12 @@
                             "type": "object",
                             "required": [
                                 "orderedConvoNodes",
-                                "notes",
                                 "levelKey"
                             ],
                             "properties": {
                                 "orderedConvoNodes": {
                                     "type": "array",
                                     "description": "Ordered list of conversation node identifiers",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "notes": {
-                                    "type": "array",
-                                    "description": "Collection of notes for this level",
                                     "items": {
                                         "type": "string"
                                     }

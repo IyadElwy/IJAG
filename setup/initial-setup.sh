@@ -14,6 +14,8 @@ typewriter_effect() {
     done
 }
 
+# INSTALL HELM CHART INTO ENV
+
 typewriter_effect "<PRELUDE>" 0.1
 echo
 sleep 0.5
@@ -52,9 +54,7 @@ sleep 1
 echo "."
 echo
 
-typewriter_effect "Meanwhile..." 0.1
-echo
-typewriter_effect "<STREETS OF TURING CITY>" 0.1
+typewriter_effect "<STREETS OF TURING CITY 11:35:43 PM>" 0.1
 echo
 text="Huh?"
 typewriter_effect "$text" 0.06
@@ -94,7 +94,10 @@ sleep 1
 echo "."
 echo
 
-typewriter_effect "<PLUGS USB INTO PC AT HOME>" 0.1
+typewriter_effect "<HOME 12:53:21 AM>" 0.1
+echo
+text="Let's see if I can't find some old machine to plug in this drive..."
+typewriter_effect "$text" 0.06
 echo
 text="What is this?"
 typewriter_effect "$text" 0.06

@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 class LevelState(BaseModel):
     orderedConvoNodes: list[str]
-    notes: list[str]
     levelKey: str
 
 

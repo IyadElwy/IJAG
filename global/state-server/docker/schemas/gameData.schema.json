@@ -22,13 +22,6 @@
                                 "type": "string"
                             }
                         },
-                        "objectives": {
-                            "description": "Current level objectives",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
                         "onWrongKey": {
                             "description": "Response when an incorrect key is provided",
                             "type": "object",
@@ -153,7 +146,6 @@
                     "required": [
                         "title",
                         "storyPlot",
-                        "objectives",
                         "onWrongKey",
                         "onCorrectKey",
                         "convoNodes"

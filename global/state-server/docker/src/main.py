@@ -1,7 +1,8 @@
 from alter_state.alter import alter_state
-from fastapi import FastAPI
-from models.game_data import ConversationNode
+from fastapi import FastAPI, HTTPException
+from models.game_data import ConversationNode, Level
 from models.messages import NextNode
+from models.state import GameState
 from utils.json_state_helpers import (
     add_game_state_ordered_convo_node,
     get_current_game_state,
@@ -86,3 +87,18 @@ async def on_join() -> ConversationNode:
         current_level_ordered_convo_nodes[-1]
     )
     return next_node_data
+
+
+@app.get("/gameData/{level}")
+async def get_game_data(level: str) -> Level:
+    try:
+        int(level)
+    except ValueError:
+        return HTTPException(status_code=422, detail="Level string not valid")
+    return get_game_level_data(level)
+
+
+@app.get("/gameState")
+async def get_game_state() -> GameState:
+    current_game_state = get_current_game_state()
+    return current_game_state

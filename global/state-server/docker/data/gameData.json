@@ -10,11 +10,10 @@
                 "",
                 "Welcome to your first level.",
                 "The current pod is your entrypoint to the game.",
-                "You can use the notes app to write notes, get current objectives and more.",
-                "Run \"notes --help\" to know more about how to use it."
-            ],
-            "objectives": [
-                "Check for any special software that might be installed on the pod and try to run it."
+                "You can use the notes app to get current objectives, see which level you're currently on and see previous conversations with mandy.",
+                "Run \"notes --help\" to know more about how to use it.",
+                "",
+                "To get started in this level, enter \"irssi\" to enter the irc chat and look for any pre-existing channels."
             ],
             "onWrongKey": {
                 "message": [
